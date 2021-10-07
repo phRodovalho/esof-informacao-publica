@@ -2,16 +2,18 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-
+    <?php include("head.php") ?>
+    <script src="https://cdn.tiny.cloud/1/yurkwx6m9mhihtylqvdycmktq2zl3kh9tq8eied6qhuzetqd/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     <link rel="stylesheet" type="text/css" href="style-blog.css" />
-    <title>Public-information</title>
 </head>
+
+<?php
+$conexao = mysqli_connect("localhost", "root", "santos1809", "public_information", 3306);
+if ($conexao) {
+    $query = "SELECT * FROM category";
+    $select = mysqli_query($conexao, $query);
+}
+?>
 
 <body>
     <nav class="navbar navbar-inverse">
@@ -58,14 +60,42 @@
                 </div>
 
             </div>
-       
+
             <div class="col-sm-9">
-                <h4><small>CREATE POST</small></h4>
+                <h4>CREATE POST</h4>
                 <hr>
-                <form class="form-horizontal" method="post" action="">
-                    <label>Title</label>
-                    <label>Body</label>
-                    <label>Category</label>
+                <form class="form-horizontal" method="post" action="insere-post.php">
+                    <div class="form-group row">
+                        <label class=" col-sm-2 float-left">Title:</label>
+                        <div class="col-sm-12">
+                            <input class="form-control" type="text" name="txtTitle" placeholder="Insert Post Title" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm-12">
+                            <textarea id="edit-post" class="form-control" name="txtTitle">Write your Post body here</textarea>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row">
+                        <label class="col-sm-1">Category: </label>
+                        <div class="col-sm-5">
+                            <select class="form-control" name="category" id="categ" required>
+                                <option>Select category</option>
+                                <?php while ($line = mysqli_fetch_array($select)) { ?>
+                                    <option value="<?php echo $line['id'] ?>"><?php echo $line['category'] ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-1">
+                            <input class="btn btn-success" type="submit" value="Finish and Save Post">
+                        </div>
+                    </div>
                 </form>
 
             </div>
@@ -75,7 +105,11 @@
     <footer class="container-fluid">
         <p>Footer Text</p>
     </footer>
-
+    <script>
+        tinymce.init({
+            selector: '#edit-post'
+        });
+    </script>
 </body>
 
 </html>

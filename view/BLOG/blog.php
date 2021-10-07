@@ -2,18 +2,12 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-
+    <?php include("head.php") ?>
     <link rel="stylesheet" type="text/css" href="style-blog.css" />
-    <title>Public-information</title>
 </head>
 
 <body>
+    <!-- Barra superior menu !-->
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -31,7 +25,7 @@
             </ul>
         </div>
     </nav>
-
+    <!-- FIM Barra superior menu !-->
     <div class="container panel panel-default">
         <div class="row content">
             <div class="col-sm-3 sidenav">
