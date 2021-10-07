@@ -78,7 +78,7 @@
                 <hr>
 
                 <h4>Leave a Comment:</h4>
-                <form role="form">
+                <form role="form" action="comment.php">
                     <div class="form-group">
                         <textarea class="form-control" rows="3" required></textarea>
                     </div>
