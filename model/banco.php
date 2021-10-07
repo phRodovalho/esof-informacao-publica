@@ -33,6 +33,13 @@ class Banco{
         }
         return $array;
     }
+    public function getCategory(){
+        $result = $this->mysqli->query("SELECT * FROM category");
+        while($row = $result->fetch_array(MYSQLI_ASSOC)){
+            $array[] = $row;
+        }
+        return $array;
+    }
 
     public function deletePost($idPost){
         if($this->mysqli->query("DELETE FROM `post` WHERE `id` = '$idPost';")== TRUE){
