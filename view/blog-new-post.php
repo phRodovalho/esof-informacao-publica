@@ -8,7 +8,7 @@
 </head>
 
 <?php
-$conexao = mysqli_connect("localhost", "root", "santos1809", "public_information", 3306);
+$conexao = mysqli_connect("localhost", "root", "****", "public_information", 3306);
 if ($conexao) {
     $query = "SELECT * FROM category";
     $select = mysqli_query($conexao, $query);
