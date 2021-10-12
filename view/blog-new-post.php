@@ -8,6 +8,8 @@
 </head>
 
 <?php
+session_start();
+$_SESSION["userId"] = '4';
 $conexao = mysqli_connect("localhost", "root", "santos1809", "public_information", 3306);
 if ($conexao) {
     $query = "SELECT * FROM category";
@@ -26,7 +28,7 @@ if ($conexao) {
                     <hr style="height:2px;background-color:gray">
                 </div>
 
-                <form class="form-horizontal" method="post" action="insere-post.php">
+                <form class="form-horizontal" method="post" action="../controller/ControllerPost.php">
 
                     <div class="form-group row">
                         <div class="col-sm-12">
@@ -37,7 +39,7 @@ if ($conexao) {
 
                     <div class="form-group row">
                         <div class="col-sm-12">
-                            <textarea id="edit-post" class="form-control" name="txtTitle" required style="height: 500px;">Write your Post body here</textarea>
+                            <textarea id="edit-post" class="form-control" name="txtBody" required style="height: 500px;">Write your Post body here</textarea>
                         </div>
                     </div>
 
@@ -45,10 +47,10 @@ if ($conexao) {
                     <div class="form-group row">
                         <label class="control-label col-sm-1" for="category">Category:</label>
                         <div class="col-sm-2">
-                            <select class="form-control" name="category" id="categ" required>
+                            <select class="form-control" name="category" required>
                                 <option>Select category</option>
                                 <?php while ($line = mysqli_fetch_array($select)) { ?>
-                                    <option value="<?php echo $line['id'] ?>"><?php echo $line['category'] ?></option>
+                                    <option value="<?php echo $line['idcategory'] ?>"><?php echo $line['category'] ?></option>
                                 <?php } ?>
                             </select>
                         </div>
