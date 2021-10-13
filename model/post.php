@@ -2,7 +2,7 @@
 //metodos de envio para o banco com PDO
 class Post
 {
-    public $likes;
+    public $likes = 0;
 
     private $title;
     private $description;
@@ -11,21 +11,28 @@ class Post
     private $idPost;
     private $conexao;
 
-    public function __construct($title, $description, $userId, $categoryId)
-    {
-        $this->title = $title;
-        $this->description = $description;
-        $this->userId = $userId;
-        $this->categoryId = $categoryId;
-        $this->likes = 0;
-
+    public function __construct()
+    {        
         //após instanciar os atributos, crio um obj PDO para conexão com banco 
         try {
-            $this->conexao = new PDO('mysql:host=localhost;dbname=public_information', 'root', '****');
+            $this->conexao = new PDO('mysql:host=localhost;dbname=public_information', 'root', 'santos1809');
         } catch (Exception $e) {
             echo $e->getMessage();
             die();
         }
+    }
+    //set
+    public function setTitle($title){
+        $this->title = $title;
+    }
+    public function setDescription($description){
+        $this->description = $description;
+    }
+    public function setUserId($userId){
+        $this->userId = $userId;
+    }
+    public function setCategoryId($categoryId){
+        $this->categoryId = $categoryId;
     }
     //get
     public function getTitle()
@@ -100,7 +107,6 @@ class Post
         return $posts;
     }
 
-
     public function update(string $title, string $description, string $data, int $idCategory, int $idPost): int
     {
         $sql = 'UPDATE post SET title = ?, description = ?, data = ?, category_Idcategory = ?, WHERE idPost = ?';
@@ -132,5 +138,32 @@ class Post
         } else {
             return false;
         }
+    }
+}
+
+Class Category{
+    private $conexao;
+
+    public function __construct()
+    {
+        try {
+            $this->conexao = new PDO('mysql:host=localhost;dbname=public_information', 'root', 'santos1809');
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            die();
+        } 
+    }
+
+    public function listCategory(): array
+    {
+        $sql = 'select * from category';
+
+        $cat = [];
+
+        foreach ($this->conexao->query($sql) as $key => $value) {
+            array_push($cat, $value);
+        }
+
+        return $cat;
     }
 }

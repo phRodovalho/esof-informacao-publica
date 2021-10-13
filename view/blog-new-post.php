@@ -10,13 +10,19 @@
 <?php
 
 session_start();
-$_SESSION["userId"] = '4';
-$conexao = mysqli_connect("localhost", "root", "******", "public_information", 3306);
+require_once("../model/post.php");
+//Antes de carregar a pagina crio a verificação com as variaveis de sessão para saber se
+//o usuário tem permissão para escrever post's
+// userType values -> A= ADM; W = Writer/Escritor; P = Pattern/Padrão
+$_SESSION["userType"] = 'A'; //Simulando um usuário Administrador
 
-if ($conexao) {
-    $query = "SELECT * FROM category";
-    $select = mysqli_query($conexao, $query);
+if($_SESSION["userType"] == 'P'){
+    echo "<script type='text/javascript'>alert('User is not allowed to write new posts');window.location.href = 'blog-home.php';</script>";   
+}else{
+    $categ = new Category(); //instanciando obj category do model/post.php
+    $_SESSION["postOp"] = 1;
 }
+    
 ?>
 
 <body>
@@ -51,7 +57,8 @@ if ($conexao) {
                         <div class="col-sm-2">
                             <select class="form-control" name="category" required>
                                 <option>Select category</option>
-                                <?php while ($line = mysqli_fetch_array($select)) { ?>
+                                <?php
+                                foreach( $categ->listCategory() as $key => $line){ ?>
                                     <option value="<?php echo $line['idcategory'] ?>"><?php echo $line['category'] ?></option>
                                 <?php } ?>
                             </select>

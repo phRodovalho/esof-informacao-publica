@@ -6,28 +6,66 @@
 </head>
 
 <body>
-    <?php include("navbar.php") ?>
+    <?php
+    include("navbar.php");
+    require_once("../model/post.php");
+
+    $post = new Post();
+    $all = $post->list();
+
+
+    ?>
+
     <div class="container">
         <div class="row">
             <div class="leftcolumn">
-                <div class="card">
-                    <h2>TITLE HEADING</h2>
-                    <h5>Title description, Dec 7, 2017</h5>
-                    <div class="fakeimg" style="height:200px;">Image</div>
-                    <p>Some text..</p>
-                    <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
-                </div>
-                <div class="card">
-                    <h2>TITLE HEADING</h2>
-                    <h5>Title description, Sep 2, 2017</h5>
-                    <div class="fakeimg" style="height:200px;">Image</div>
-                    <p>Some text..</p>
-                    <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
-                </div>
+                <?php
+                foreach ($all as $key => $value) {
+                    $dt = date_create($value['date']); //criando obj tipo data para formatar 
+                    /*$descr = strip_tags($value['description']);
+
+                    if(strlen($value['description']) > 500){
+                        $descr =  substr($value['description'], 0, 500);
+                    }else $descr = $value['description'];
+                    */
+                    echo '<div class="card">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h2 class="text-center">' . strtoupper($value['title']) . '</h2>
+                                <hr>
+                                <h5>
+                                    <div class="row">
+                                        <div class="col-sm-11 text-left"><b>' . date_format($dt, 'l, d-m-Y') . '</b></div>
+                                        <div class="col-sm-1">
+                                            <span class="glyphicon glyphicon-heart"></span> ' . $value['likes'] . '
+                                        </div>
+                                    </div>
+                                </h5>
+                            </div>
+                            <div class="panel-body">
+                                <p>
+                                ' . $value['description'] . '
+                                </p>
+                            </div>
+                            <div class="panel-footer">
+                                <div class="btn-group btn-group-justified">
+                                    <a href="#" class="btn btn-info btn-sm">
+                                        <span class="glyphicon glyphicon-comment"></span> Comment
+                                    </a>
+                                    <a href="#" class="btn btn-info btn-sm">Like
+                                        <span class="glyphicon glyphicon-heart-empty"></span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>';
+                }
+                ?>
+                
             </div>
             <div class="rightcolumn">
                 <div class="card">
-                    <h2>About Me</h2>
+                    <h2>About Us</h2>
                     <div class="fakeimg" style="height:100px;">Image</div>
                     <p>Some text about me in culpa qui officia deserunt mollit anim..</p>
                 </div>
