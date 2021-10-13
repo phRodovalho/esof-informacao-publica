@@ -1,5 +1,5 @@
 <?php
-
+/// tentando criar conexão via orientação a objetos 
 class cadastroController{
 
     private $cadastro;
@@ -9,4 +9,4 @@ class cadastroController{
         $this->incluir();
     }
 
-    //precisa implementar
+    ///precisa implementar
