@@ -47,7 +47,7 @@
                                 ' . $value['description'] . '
                                 </p>
                             </div>
-                            <div class="panel-footer">
+                            <div>
                                 <div class="btn-group btn-group-justified">
                                     <a href="#" class="btn btn-info btn-sm">
                                         <span class="glyphicon glyphicon-comment"></span> Comment

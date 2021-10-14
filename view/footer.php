@@ -1,3 +1,3 @@
 <footer class="container-fluid">
-    <p>Footer Text</p>
+    <p>All Direitos reserved for P&G Enterprise</p>
 </footer>
