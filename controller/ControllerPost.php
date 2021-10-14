@@ -24,6 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_SESSION["postOp"] == 1) { //PostO
     echo $post->getDescription();
     echo $post->getUserId() . PHP_EOL;
     echo $post->getCategoryId() . PHP_EOL;
+    var_dump()
     */
 
     //insert

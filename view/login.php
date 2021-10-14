@@ -2,62 +2,32 @@
 <html lang="pt-br">
 
 <head>
-    <?php include("head.php") ?>
+  <?php include("head.php") ?>
+  <link rel="stylesheet" type="text/css" href="css/style-login.css" />
 </head>
 
-<body> 
-    <?php include("navbar.php") ?>
-    <div class="container panel panel-default" style="padding: 20px;">
-        <div class=" title well text-center">
-                <form action="login.php" method="POST"> 
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp">
-                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Password</label>
-                        <input type="password" class="form-control" id="input_pwd">
-                    </div>
-                   
-                        <button type="submit" class="entrar" id="entrar" name="login">Submit</button>
-            </form>
-        </div>      
-    </div>
+<body>
+  <?php include("navbar-login.php") ?>
 
-<!-- Outro examplo para login
-    <div class="container">
-         <h2>Horizontal form</h2>
-        <form class="form-horizontal" action="/action_page.php">
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="email">Email:</label>
-      <div class="col-sm-10">
-        <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="pwd">Password:</label>
-      <div class="col-sm-10">          
-        <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
-      </div>
-    </div>
-    <div class="form-group">        
-      <div class="col-sm-offset-2 col-sm-10">
-        <div class="checkbox">
-          <label><input type="checkbox" name="remember"> Remember me</label>
+  <div class="container">
+    <div class="row thera">
+      <div class="col-sm-6 col-md-4 col-md-offset-4">
+        <h1 class="text-center login-title"><b>Sign in to your <br> Public Information account</b></h1>
+        <div class="account-wall">
+          <img class="profile-img" src="img/img_avatar.png" alt="">
+          <form class="form-signin" method="post" action="../controller/ControllerLogin.php">
+            <input type="text" class="form-control" placeholder="Email" required autofocus>
+            <input type="password" class="form-control" placeholder="Password" required>
+            
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+          </form>
         </div>
+        <h3 class="text-center login-title">Don't have an account?</h3>
+        <a href="create-account.php" class="text-center new-account btn btn-lg btn-default btn-block">Create an account </a>
       </div>
     </div>
-    <div class="form-group">        
-      <div class="col-sm-offset-2 col-sm-10">
-        <button type="submit" class="btn btn-default">Submit</button>
-      </div>
-    </div>
-  </form>
-</div>
-
-!-->
-    <?php include("footer.php") ?>
+  </div>
+  <?php include("footer.php") ?>
 </body>
 
 </html>

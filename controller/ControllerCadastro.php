@@ -8,5 +8,5 @@ class cadastroController{
         $this->cadastro = new Cadastro();
         $this->incluir();
     }
-
-    ///precisa implementar
+}
+?>

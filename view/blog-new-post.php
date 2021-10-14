@@ -4,7 +4,6 @@
 <head>
     <?php include("head.php") ?>
     <script src="https://cdn.tiny.cloud/1/yurkwx6m9mhihtylqvdycmktq2zl3kh9tq8eied6qhuzetqd/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-    
 </head>
 
 <?php
@@ -16,13 +15,13 @@ require_once("../model/post.php");
 // userType values -> A= ADM; W = Writer/Escritor; P = Pattern/Padrão
 $_SESSION["userType"] = 'A'; //Simulando um usuário Administrador
 
-if($_SESSION["userType"] == 'P'){
-    echo "<script type='text/javascript'>alert('User is not allowed to write new posts');window.location.href = 'blog-home.php';</script>";   
-}else{
+if ($_SESSION["userType"] == 'P') {
+    echo "<script type='text/javascript'>alert('User is not allowed to write new posts');window.location.href = 'blog-home.php';</script>";
+} else {
     $categ = new Category(); //instanciando obj category do model/post.php
     $_SESSION["postOp"] = 1;
 }
-    
+
 ?>
 
 <body>
@@ -58,7 +57,7 @@ if($_SESSION["userType"] == 'P'){
                             <select class="form-control" name="category" required>
                                 <option>Select category</option>
                                 <?php
-                                foreach( $categ->listCategory() as $key => $line){ ?>
+                                foreach ($categ->listCategory() as $key => $line) { ?>
                                     <option value="<?php echo $line['idcategory'] ?>"><?php echo $line['category'] ?></option>
                                 <?php } ?>
                             </select>

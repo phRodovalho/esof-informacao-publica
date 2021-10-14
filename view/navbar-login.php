@@ -14,8 +14,8 @@
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
                     <li><a href="home.php">Home</a></li>
-                    <li><a href="access-point.php">Access Point</a></li>
-                    <li class="dropdown">
+                    <li class="disabled"><a href="access-point.php">Access Point</a></li>
+                    <li class="dropdown disabled">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="blog-home.php">Blog <span class="caret"></span></a>
                         <ul class="dropdown-menu text-center">
                             <li><a href="blog-home.php">Blog Home</a></li>
@@ -33,6 +33,3 @@
     </nav>
 
     <!--------------------------- FIM Barra menu superior !--------------------------->
-    <div class="header">
-        <img src="img/header-logo.png" style="width: 100%; height: 250px">
-    </div>
