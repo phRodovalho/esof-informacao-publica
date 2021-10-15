@@ -63,7 +63,7 @@ if ($_SESSION["userType"] == 'P') {
                             </select>
                         </div>
                     </div>
-
+                    <input type="hidden" value="1" name="postOp">
                     <div class="form-group">
                         <div class="col">
                             <button class="btn btn-lg btn-success btn-block" type="submit">Finish and Save Post</button>
