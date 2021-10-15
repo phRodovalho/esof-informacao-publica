@@ -20,11 +20,11 @@ class Post
             echo $e->getMessage();
             die();
         }
-        if ($idPost != null) {
+        if ($idPost != null) { //se instaciar a classe com idPost set as variaveis 
             $sql = "Select * from post where idPost = $idPost";
-            
+
             foreach ($this->conexao->query($sql) as $value) {
-                
+
                 $this->title = $value['title'];
                 $this->description = $value['description'];
                 $this->userId = $value['user_idUser'];
@@ -34,29 +34,29 @@ class Post
             }
         }
     }
-       //increment like +1
-       public function likePost(): int
-       {
-           if ($this->idPost != null) {
-               $sql = 'UPDATE post SET likes = ? WHERE idPost = ?';
-               $prepare = $this->conexao->prepare($sql);
-   
-               $this->likes = $this->likes + 1; //like+1 and save in database
-   
-               $prepare->bindParam(1, $this->likes);
-               $prepare->bindParam(2, $this->idPost);
+    //increment like +1
+    public function likePost(): int
+    {
+        if ($this->idPost != null) {
+            $sql = 'UPDATE post SET likes = ? WHERE idPost = ?';
+            $prepare = $this->conexao->prepare($sql);
 
-               
-               if ($prepare->execute() == true) {
-                   return $this->likes;
-               } else {
-                   return false;
-               }
-           }else {
-               return false;
-           }
-       }
-   
+            $this->likes = $this->likes + 1; //like+1 and save in database
+
+            $prepare->bindParam(1, $this->likes);
+            $prepare->bindParam(2, $this->idPost);
+
+
+            if ($prepare->execute() == true) {
+                return $this->likes;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
 
     //set
     public function setTitle($title)
@@ -97,7 +97,7 @@ class Post
         return $this->description;
     }
 
- 
+
     //CRUD of Post's
     public function insert(string $title, string $description, string $data, int $like, int $idUser, int $idCategory): int
     {
@@ -121,7 +121,7 @@ class Post
     public function list($limit, $offset): array
     {
         $sql = "select * from post order by date desc limit $limit offset $offset ";
-        
+
 
         $posts = [];
 
@@ -131,7 +131,7 @@ class Post
 
         return $posts;
     }
-    
+
     public function listPopular(): array
     {
         $sql = "select idpost, title, likes from post order by likes desc limit 5; ";
@@ -145,6 +145,17 @@ class Post
         return $posts;
     }
 
+    public function listOnePost($idPost)
+    {
+        $sql = "select * from post where idpost = ? ";
+
+        $stmt = $this->conexao->prepare($sql);
+        $stmt->execute([$idPost]);
+        $post = $stmt->fetch();
+
+        return $post;
+    }
+
     public function countPosts()
     {
         $sql = "SELECT COUNT(*) FROM post ";
@@ -152,7 +163,6 @@ class Post
         $prepare = $this->conexao->query($sql);
         return $prepare->fetchColumn();
     }
-
 
     public function update(string $title, string $description, string $data, int $idCategory, int $idPost): int
     {
@@ -201,6 +211,7 @@ class Category
             die();
         }
     }
+    
 
     public function listCategory(): array
     {
@@ -214,4 +225,66 @@ class Category
 
         return $cat;
     }
+}
+
+Class Comment{
+
+    private $conexao;
+    private $description;
+    private $like;
+    private $date;
+    private $tag;
+    private $postId;
+    private $userId;
+
+    public function __construct()
+    {
+        try {
+            $this->conexao = new PDO('mysql:host=localhost;dbname=public_information', 'root', 'santos1809');
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            die();
+        }
+
+    }
+
+    public function insert($description, $date, $tag, $postId, $userId)
+    {
+        $sql = 'INSERT into comment (description, date, tag, post_idpost, user_idUser) values (?,?,?,?,?)';
+        
+        $prepare = $this->conexao->prepare($sql);
+
+        $prepare->bindParam(1, $description);
+        $prepare->bindParam(2, $date);
+        $prepare->bindParam(3, $tag);
+        $prepare->bindParam(4, $postId);
+        $prepare->bindParam(5, $userId);
+
+        if ($prepare->execute() == TRUE) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function list($postId){
+         $sql = "Select c.description, c.like, c.date, c.tag, c.post_idpost, u.name from comment c, user u where c.user_idUser = u.idUser  and c.post_idpost = $postId";
+        $comment = [];
+
+        foreach ($this->conexao->query($sql) as $value) {
+            array_push($comment, $value);
+        }
+        return $comment;
+    }
+
+    public function countComment($postId)
+    {
+        $sql = "SELECT COUNT(*) FROM comment where post_idpost = $postId ";
+
+        $prepare = $this->conexao->query($sql);
+        return $prepare->fetchColumn();
+    }
+
+    
+
 }

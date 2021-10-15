@@ -17,6 +17,8 @@
         <div class="row">
             <div class="leftcolumn">
                 <?php
+                session_start();
+                
                 //for pagination
                 if (isset($_GET['page_no']) && $_GET['page_no'] != "") {
                     $page_no = $_GET['page_no'];
@@ -61,13 +63,13 @@
                             </div>
                             <div class="panel-body">
                                 <p>
-                                ' . $d . '
+                                ' . $d /*description*/ . '
                                 </p>
                             </div>
                             <div>
                                 <div class="btn-group btn-group-justified">
                                     <div class="btn-group">
-                                        <form method="post" action="blog-page.php">
+                                        <form method="get" action="blog-post-page.php">
                                             <input type="hidden" name="idpost" value="' . $value['idpost'] . '">
                                             <button id="comment" type="submit" class="btn btn-primary"> <span class="glyphicon glyphicon-comment"></span> Comment</button>
                                         </form>
@@ -123,7 +125,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <form method="post" action="blog-page.php">
+                                    <form method="get" action="blog-post-page.php">
                                         <input type="hidden" name="idpost" value="' . $value['idpost'] . '">
                                         <button type="submit" class="btn btn-block btn-link btn-sm" style="padding:0px">Read</button>
                                     </form>
