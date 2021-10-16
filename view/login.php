@@ -16,8 +16,8 @@
         <div class="account-wall">
           <img class="profile-img" src="img/img_avatar.png" alt="">
           <form class="form-signin" method="post" action="../controller/ControllerLogin.php">
-            <input type="text" class="form-control" placeholder="Email" required autofocus>
-            <input type="password" class="form-control" placeholder="Password" required>
+            <input type="text" class="form-control" name="email"placeholder="Email" required autofocus>
+            <input type="password" class="form-control" name="password"placeholder="Password" required>
             
             <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
           </form>

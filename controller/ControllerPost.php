@@ -28,7 +28,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_SESSION["postOp"] == 1) { //PostO
     */
 
     //insert
-    if ($post->insert($post->getTitle(), $post->getDescription(), $dt, 0, $post->getUserId(), $post->getCategoryId()) == true) {
+    if ($post->insert($post->getTitle(), $post->getDescription(), $dt, 0, $post->getUserId(),
+     $post->getCategoryId()) == true) {
         echo "<script type='text/javascript'>alert('Post saved successfully!');window.location.href = '../view/blog-home.php';</script>";   
     } else echo "<script type='text/javascript'>alert('Something went wrong, try again');window.location.href = '../view/blog-new-post.php';</script>";
 }

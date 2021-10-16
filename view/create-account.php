@@ -5,6 +5,13 @@
     <?php include("head.php") ?>
 </head>
 
+<?php
+    session_start();
+    require_once("../model/user.php");
+
+
+?>
+
 <body>
     <?php include("navbar-login.php") ?>
     <div class="container panel panel-default" style=" margin-top: 70px;">
