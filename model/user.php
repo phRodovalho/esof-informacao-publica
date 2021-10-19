@@ -1,8 +1,7 @@
 <?php
-
+require_once("banco.php");
 class User
 {
-
     ///pt-br criando os atributos privados
     /// en-us creating the private atributes
     private $name;
@@ -14,17 +13,11 @@ class User
     private $location_idlocation;
     private $conexao;
 
-
-
     public function __construct()
     {
         //pt-br criando o objeto para conexão com o banco
-        try {
-            $this->conexao = new PDO('mysql:host=localhost;dbname=public_information', 'root', 'santos1809');
-        } catch (Exception $e) {
-            echo $e->getMessage();
-            die();
-        }
+        $banco = new Banco();
+        $this->conexao = $banco->getConnection();
     }
 
     // pt-br atribuindo os valores com set 
@@ -147,7 +140,6 @@ class User
 
 class Location
 {
-
     private $state;
     private $country;
     private $city;
@@ -158,12 +150,8 @@ class Location
 
     public function __construct()
     {
-        try {
-            $this->conex = new PDO('mysql:host=localhost;dbname=public_information', 'root', 'santos1809');
-        } catch (Exception $e) {
-            echo $e->getMessage();
-            die();
-        }
+        $banco = new Banco();
+        $this->conex = $banco->getConnection();
     }
 
     public function set_state($state)

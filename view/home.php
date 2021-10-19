@@ -2,10 +2,8 @@
 <html lang="en">
 
 <head>
-    <?php
-    session_start();
-    include("helper/head.php");
-    ?>
+    <?php include("helper/head.php");
+    session_start(); ?>
 </head>
 
 <body>
@@ -13,11 +11,11 @@
     <div class="container panel panel-default" style="padding: 20px;">
         <div class=" title well text-center">
             <h1>
-                <span> Public Information
+                <span> Access Point
             </h1>
         </div>
-    </div>
 
+    </div>
     <?php include("helper/footer.php") ?>
 </body>
 

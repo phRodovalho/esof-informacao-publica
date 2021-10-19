@@ -11,7 +11,20 @@
     include("helper/navbar.php");
     require_once("../model/post.php");
     require_once("../model/banco.php");
+
+    if(!isset($_SESSION['idUser'])){
+      echo '  <div class="container">
+        <div class="panel panel-default text center">
+            <div class="panel-body">
+            <h3>To access the blog you need to login or create an account</h3>
+            <a href="login.php" class="text-center btn btn-md btn-primary">Sign in or Create an account </a>
+            </div>
+            </div>
+        </div>';
+        exit();
+    }
     ?>
+    
 
     <div class="container">
         <div class="row">

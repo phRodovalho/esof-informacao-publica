@@ -6,24 +6,23 @@
     <script src="https://cdn.tiny.cloud/1/yurkwx6m9mhihtylqvdycmktq2zl3kh9tq8eied6qhuzetqd/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 </head>
 
-<?php
-session_start();
-require_once("../model/post.php");
-//Antes de carregar a pagina crio a verificação com as variaveis de sessão para saber se
-//o usuário tem permissão para escrever post's
-// userType values -> A= ADM; W = Writer/Escritor; P = Pattern/Padrão
-//$_SESSION["userType"] = 'A'; //Simulando um usuário Administrador
-
-if ($_SESSION["userType"] == 'P') {
-    echo "<script type='text/javascript'>alert('User is not allowed to write new posts');window.location.href = 'blog-home.php';</script>";
-} else {
-    $categ = new Category(); //instanciando obj category do model/post.php
-    $_SESSION["postOp"] = 1;
-}
-
-?>
-
 <body>
+    <?php
+    session_start();
+    require_once("../model/post.php");
+    //Antes de carregar a pagina crio a verificação com as variaveis de sessão para saber se
+    //o usuário tem permissão para escrever post's
+    // userType values -> A= ADM; W = Writer/Escritor; P = Pattern/Padrão
+    //$_SESSION["userType"] = 'A'; //Simulando um usuário Administrador
+
+    if ($_SESSION['userType'] == 'P') {
+        echo "<script type='text/javascript'>alert('User is not allowed to write new posts');window.location.href = 'blog-home.php';</script>";
+    } else {
+        $categ = new Category(); //instanciando obj category do model/post.php
+        $_SESSION["postOp"] = 1;
+    }
+
+    ?>
     <?php include("helper/navbar.php") ?>
 
     <div class="container panel panel-default">
@@ -63,6 +62,8 @@ if ($_SESSION["userType"] == 'P') {
                         </div>
                     </div>
                     <input type="hidden" value="1" name="postOp">
+                    <?php echo $_SESSION['idUser'] ?>
+                    <input type="hidden" value="<?php echo $_SESSION['idUser'] ?>" name="idUser">
                     <div class="form-group">
                         <div class="col">
                             <button class="btn btn-lg btn-success btn-block" type="submit">Finish and Save Post</button>

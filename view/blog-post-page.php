@@ -100,7 +100,6 @@
 
                     <?php //listar comentarios
                     $com = $comment->list($id);
-                    var_dump($com);
                     foreach ($com as $key => $value) {
                         $dt = date_create($value['date']);
                         echo '<div class="row">

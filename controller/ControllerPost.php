@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (filter_input(INPUT_POST, "postOp") == 1) { //insert
         $title = filter_input(INPUT_POST, "txtTitle");
         $description = filter_input(INPUT_POST, "txtBody");
-        $userId = $_SESSION["userId"] = 4;
+        $userId = $_SESSION['idUser'];
         $categoryId = filter_input(INPUT_POST, "category");
 
         $post = new Post();

@@ -13,14 +13,11 @@
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
-                    <li><a href="home.php">Home</a></li>
-                    <li class="disabled"><a href="access-point.php">Access Point</a></li>
-                    <li class="dropdown disabled">
+                    <li><a href="home.php">Access Point</a></li>
+                    <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="blog-home.php">Blog <span class="caret"></span></a>
                         <ul class="dropdown-menu text-center">
                             <li><a href="blog-home.php">Blog Home</a></li>
-                            <hr style="height:1px;background-color:ligth-gray; padding:0px; margin:5px;">
-                            <li><a href="blog-new-post.php">Only Admin Blog</a></li>
                         </ul>
                     </li>
                     <li><a href="about.php">About us</a></li>

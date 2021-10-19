@@ -2,14 +2,11 @@
 <html lang="en">
 
 <head>
-    <?php include("helper/head.php") ?>
+    <?php include("helper/head.php");
+    session_start();
+    require_once("../model/user.php"); ?>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
-
-<?php
-session_start();
-require_once("../model/user.php");
-?>
 
 <body>
     <?php include("helper/navbar-login.php") ?>

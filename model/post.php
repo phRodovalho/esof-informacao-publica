@@ -15,13 +15,6 @@ class Post
     public function __construct($idPost = null)
     {
         //após instanciar os atributos, crio um obj PDO para conexão com banco 
-       /* try {
-            $this->conexao = new PDO('mysql:host=localhost;dbname=public_information', 'root', 'santos1809');
-        } catch (Exception $e) {
-            echo $e->getMessage();
-            die();
-        }*/
-
         $banco = new Banco();
         $this->conexao = $banco->getConnection();
     
@@ -137,7 +130,7 @@ class Post
         return $posts;
     }
 
-    public function listPopular(): array
+    public function listPopular()
     {
         $sql = "select idpost, title, likes from post order by likes desc limit 5; ";
 
@@ -209,12 +202,8 @@ class Category
 
     public function __construct()
     {
-        try {
-            $this->conexao = new PDO('mysql:host=localhost;dbname=public_information', 'root', 'santos1809');
-        } catch (Exception $e) {
-            echo $e->getMessage();
-            die();
-        }
+        $banco = new Banco();
+        $this->conexao = $banco->getConnection();
     }
     
 
@@ -244,13 +233,8 @@ Class Comment{
 
     public function __construct()
     {
-        try {
-            $this->conexao = new PDO('mysql:host=localhost;dbname=public_information', 'root', 'santos1809');
-        } catch (Exception $e) {
-            echo $e->getMessage();
-            die();
-        }
-
+        $banco = new Banco();
+        $this->conexao = $banco->getConnection();
     }
 
     public function insert($description, $date, $tag, $postId, $userId)
@@ -279,7 +263,6 @@ Class Comment{
         foreach ($this->conexao->query($sql) as $value) {
             array_push($comment, $value);
         }
-        var_dump($comment);
         return $comment;
     }
 
@@ -290,7 +273,4 @@ Class Comment{
         $prepare = $this->conexao->query($sql);
         return $prepare->fetchColumn();
     }
-
-    
-
 }

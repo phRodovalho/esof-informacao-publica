@@ -11,7 +11,4 @@ define('BD_USER','root');
 define('BD_PASSWORD','santos1809');
 define('BD_DATABASE','public_information');
 
-
-
-
 ?>

@@ -26,7 +26,7 @@
           </form>
         </div>
         <h3 class="text-center login-title">Don't have an account?</h3>
-        <a href="create-account.php" class="text-center new-account btn btn-lg btn-default btn-block">Create an account </a>
+        <a href="create-account.php" class="text-center new-account btn btn-lg btn-primary btn-block">Create an account </a>
       </div>
     </div>
   </div>

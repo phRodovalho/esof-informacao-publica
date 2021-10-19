@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             //verificando se o usuario inseriu a localização
             if (isset($state) && isset($country) && isset($city) && isset($adress) && isset($district)) {
                 //pt-br inserindo valores do endereço do formulário para o banco
-                echo "inserindo localização<br>";
+                
                 $loc = new Location();
 
                 $loc->set_country($country);
@@ -51,11 +51,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 //inserindo localizaçao e retornando id da localização
                 $idLoc = $loc->insert_location($loc->getstate(), $loc->getcountry(), $loc->getcity(), $loc->getadress(), $loc->getdistrict());
-                echo "Id localizao $idLoc <br>";
+                
                 if ($idLoc != false) { //se idloc tem conteudo entao insertUser
                     if ($user->insert_user($user->getname(), $user->getemail(), $user->getpassword(), $user->getuser_type(), $user->getbirth_date(), $last_a, $idLoc)  == true) {
                         echo "<script type='text/javascript'>alert('Account created successfully!')
-                    ;window.location.href = '../view/home.php';</script>";
+                    ;window.location.href = '../view/login.php';</script>";
                     } else {
                         echo "<script type='text/javascript'>alert('Error registering User, please try again');window.location.href = '../view/create-account.php';</script>";
                     }
@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 //pt-br Chamando as funções de inseir usuário e location, passando os parâmetros da função
                 if ($user->insert_user($user->getname(), $user->getemail(), $user->getpassword(), $user->getuser_type(), $user->getbirth_date(), $last_a, null)  == true) {
                     echo "<script type='text/javascript'>alert('Account created successfully!')
-                ;window.location.href = '../view/home.php';</script>";
+                ;window.location.href = '../view/login.php';</script>";
                 } else {
                     echo "<script type='text/javascript'>alert('Error registering User, please try again');window.location.href = '../view/create-account.php';</script>";
                 }
@@ -77,9 +77,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $psw = filter_input(INPUT_POST, "password");
 
         $user_login = new User();
+        $date = new DateTime();
+        $date->setTimezone(new DateTimeZone('America/Sao_Paulo'));
+        $last_a = $date->format('Y-m-d H:i:s');
 
         $value = $user_login->select_user($email, $psw); //retorna aray de usuarios cadastrados
-        var_dump($value);
+        
         if ($value != false) {
             $_SESSION['idUser'] = $value['idUser'];
             $_SESSION['nameUser'] = $value['name'];
@@ -89,12 +92,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['birth_dateUser'] = $value['birth_date'];
             $_SESSION['lastAcessUser'] = $value['last_acess'];
             // pt-br setando o ultimo acesso e relacionando com usuario da sessão
-            $user_login->set_lastacess($value['last_acess'], $value['idUser']);
+            $user_login->set_lastacess($last_a, $value['idUser']);
 
             $_SESSION['idLocationUser'] = $value['location_idlocation'];
 
             echo "<script type='text/javascript'>alert('Login sucess');window.location.href = '../view/home.php';</script>";
-
-        }else echo "<script type='text/javascript'>alert('Access not allowed, try again or create account');window.location.href = '../view/login.php';</script>";
+        } else echo "<script type='text/javascript'>alert('Access not allowed, try again or create account');window.location.href = '../view/login.php';</script>";
     }
 }
