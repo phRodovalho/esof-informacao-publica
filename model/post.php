@@ -1,5 +1,6 @@
 <?php
 //metodos de envio para o banco com PDO
+require_once("banco.php");
 class Post
 {
     public $likes = 0;
@@ -14,12 +15,16 @@ class Post
     public function __construct($idPost = null)
     {
         //após instanciar os atributos, crio um obj PDO para conexão com banco 
-        try {
+       /* try {
             $this->conexao = new PDO('mysql:host=localhost;dbname=public_information', 'root', 'santos1809');
         } catch (Exception $e) {
             echo $e->getMessage();
             die();
-        }
+        }*/
+
+        $banco = new Banco();
+        $this->conexao = $banco->getConnection();
+    
         if ($idPost != null) { //se instaciar a classe com idPost set as variaveis 
             $sql = "Select * from post where idPost = $idPost";
 
@@ -268,12 +273,13 @@ Class Comment{
     }
 
     public function list($postId){
-         $sql = "Select c.description, c.like, c.date, c.tag, c.post_idpost, u.name from comment c, user u where c.user_idUser = u.idUser  and c.post_idpost = $postId";
+        $sql = "Select c.description, c.like, c.date, c.tag, c.post_idpost, u.name from comment c, user u where c.user_idUser = u.idUser  and c.post_idpost = $postId";
         $comment = [];
 
         foreach ($this->conexao->query($sql) as $value) {
             array_push($comment, $value);
         }
+        var_dump($comment);
         return $comment;
     }
 

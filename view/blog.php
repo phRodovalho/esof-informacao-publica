@@ -2,11 +2,11 @@
 <html lang="en">
 
 <head>
-    <?php include("head.php") ?>
+    <?php include("helper/head.php") ?>
 </head>
 
 <body>
-<?php include("navbar.php") ?>
+<?php include("helper/navbar.php") ?>
     <div class="container panel panel-default">
         <div class="row content">
             <div class="col-sm-3 sidenav">
@@ -96,7 +96,7 @@
         </div>
     </div>
 
-    <?php include("footer.php") ?>
+    <?php include("helper/footer.php") ?>
 </body>
 
 </html>

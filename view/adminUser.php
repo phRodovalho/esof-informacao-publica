@@ -2,11 +2,12 @@
 <html lang="en">
 
 <head>
-    <?php include("head.php") ?>
+    <?php include("helper/head.php");
+    session_start(); ?>
 </head>
 
 <body>
-    <?php include("navbar.php") ?>
+    <?php include("helper/navbar.php") ?>
         <div class="container">
           <h3>Control User</h3>
                 <ul class="nav nav-pills nav-stacked">
@@ -16,7 +17,7 @@
                     <li><a href="#">Delete User</a></li>
                 </ul>
         </div>  
-        <?php include("footer.php") ?>
+        <?php include("helper/footer.php") ?>
 </body>
 
 </html>

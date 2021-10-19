@@ -1,3 +1,4 @@
+ 
     <!--------------------------- Barra menu superior !--------------------------->
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
@@ -26,7 +27,16 @@
                     <li><a href="about.php">About us</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="login.php"><span class="glyphicon glyphicon-user"></span> Sing in or <b>Create Account</b></a></li>
+                    <?php
+                    //$_SESSION['name'] = ' Phelipe';
+                        if(isset($_SESSION['nameUser']) == true){
+                            echo '<li><a href="adminUser.php"><span class="glyphicon glyphicon-user"></span> ' . $_SESSION['nameUser'] . '</b></a></li>';
+                            echo '<li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span> <b>Logout</b></a></li>';
+
+                        }else echo '<li><a href="login.php"><span class="glyphicon glyphicon-user"></span> Sign in or <b>Create Account</b></a></li>';
+                    ?>
+                    <!-- <li><a href="login.php"><span class="glyphicon glyphicon-user"></span> Sing in or <b>Create Account</b></a></li>
+                    !-->
                 </ul>
             </div>
         </div>

@@ -2,16 +2,17 @@
 <html lang="en">
 
 <head>
-    <?php include("head.php") ?>
+    <?php include("helper/head.php");
+    session_start(); ?>
 </head>
 
 
 <body>
     <?php
-    include("navbar.php");
+    include("helper/navbar.php");
     require_once("../model/post.php");
-    session_start();
-    $_SESSION['userId'] = 3;
+    
+    //$_SESSION['userId'] = 3;
 
     $id = filter_input(INPUT_GET, "idpost"); //recuperando id post a ser comentado
 
@@ -55,16 +56,12 @@
 
                     </div>
                 </div>
-                <?php
-                $comment = new Comment();
-                $com = $comment->list($id);
-                if ($com != null) {
-                    echo '<h4 class="card">Leave a comment:</h4>';
-                } else echo '<h4 class="card">No comments yet, be the first to comment!</h4>';
-                ?>
-
                 <div class="card">
-
+                    <?php
+                    $comment = new Comment();
+                    //$com = $comment->list($id);
+                    ?>
+                    <h4 class="card">Leave a comment:</h4>
                     <form action=" " method="POST" role="form">
                         <div class="form-group">
                             <label class="checkbox-inline">
@@ -91,7 +88,7 @@
                         $dt = date("Y-m-d H:i:s");
                         $tag = filter_input(INPUT_POST, "tag");
 
-                        $comment->insert($descrip, $dt, $tag, $idp, $_SESSION['userId']);
+                        $comment->insert($descrip, $dt, $tag, $idp, $_SESSION['idUser']);
                     }
                     ?>
 
@@ -103,6 +100,7 @@
 
                     <?php //listar comentarios
                     $com = $comment->list($id);
+                    var_dump($com);
                     foreach ($com as $key => $value) {
                         $dt = date_create($value['date']);
                         echo '<div class="row">
@@ -122,7 +120,7 @@
             </div>
         </div>
     </div>
-    <?php include("footer.php") ?>
+    <?php include("helper/footer.php") ?>
 </body>
 
 </html>

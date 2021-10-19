@@ -26,7 +26,7 @@
                     <li><a href="about.php">About us</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="login.php"><span class="glyphicon glyphicon-user"></span> Sing in or <b>Create Account</b></a></li>
+                    <li><a href="login.php"><span class="glyphicon glyphicon-user"></span> Sign in or <b>Create Account</b></a></li>
                 </ul>
             </div>
         </div>

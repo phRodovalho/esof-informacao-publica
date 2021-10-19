@@ -1,29 +1,22 @@
 <?php
-//Esta classe precisa ser alterada para conexão via PDO
+
 include("../init.php");
 class Banco{
 
-    private $mysqli;
+    private $conexao;
 
     public function __construct()
     {
-        $this->conexao();
-    }
-   
-    private function conexao()
-    {
-        $this->mysqli = new mysqli(BD_SERVER, BD_USER , BD_PASSWORD, BD_DATABASE);
+        try {
+            $this->conexao = new PDO("mysql:host=". BD_SERVER .";dbname=" .BD_DATABASE ,  BD_USER, BD_PASSWORD);
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            die();
+        }
     }
 
-    public function setPost($title, $description, $date, $likes,$userId,$categoryId){
-        $stmt = $this->mysqli->prepare("INSERT INTO post ('title', 'description', 'date','likes', 'user_idUser', 'category_idcategory') VALUES (?,?,?,?,?,?)");
-        //insert into post (title, description, date, likes, user_idUser, category_idcategory) values ("Um exemplo de titulo", "Um exemplo de corpo de publicação", now(),0,3,6);
-        $stmt->bind_param("ssssss",$title, $description, $date,$likes, $userId, $categoryId);    
-        if( $stmt->execute() == TRUE){
-            return true ;
-        }else{
-            return false;
-        }
+    public function getConnection(){
+        return $this->conexao;
     }
 }
 

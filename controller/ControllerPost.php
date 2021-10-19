@@ -19,24 +19,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $data->setTimezone(new DateTimeZone('America/Sao_Paulo'));
         $dt = $data->format('Y-m-d H:i:s');
 
-        /*print for debug
-    echo $data->format('Y-m-d H:i:s') . PHP_EOL;
-    echo $post->getTitle();
-    echo $post->getDescription();
-    echo $post->getUserId() . PHP_EOL;
-    echo $post->getCategoryId() . PHP_EOL;
-    var_dump()
-    */
-
-        //insert
+        
         if ($post->insert($post->getTitle(), $post->getDescription(), $dt, 0, $post->getUserId(), $post->getCategoryId()) == true) {
             echo "<script type='text/javascript'>alert('Post saved successfully!');window.location.href = '../view/blog-home.php';</script>";
         } else echo "<script type='text/javascript'>alert('Something went wrong, try again');window.location.href = '../view/blog-new-post.php';</script>";
+    
     } else if (filter_input(INPUT_POST, "postOp") == 2) { //like
         $idPost = filter_input(INPUT_POST, "idPost");
         $post = new Post($idPost);
         echo $post->likePost();
-    } else if (filter_input(INPUT_POST, "postOp") == 3) { //page comment
-        
-    }
+
+    } 
 }

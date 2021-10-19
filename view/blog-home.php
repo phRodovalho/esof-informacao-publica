@@ -2,23 +2,22 @@
 <html lang="en">
 
 <head>
-    <?php include("head.php") ?>
+    <?php include("helper/head.php");
+    session_start(); ?>
 </head>
 
 <body>
     <?php
-    include("navbar.php");
+    include("helper/navbar.php");
     require_once("../model/post.php");
-
-    $post = new Post();
+    require_once("../model/banco.php");
     ?>
 
     <div class="container">
         <div class="row">
             <div class="leftcolumn">
                 <?php
-                session_start();
-                
+                $post = new Post();
                 //for pagination
                 if (isset($_GET['page_no']) && $_GET['page_no'] != "") {
                     $page_no = $_GET['page_no'];
@@ -83,7 +82,7 @@
                     </div>';
                 }
                 ?>
-                <?php include("pagination.php") ?>
+                <?php include("helper/pagination.php") ?>
 
                 <script type="text/javascript">
                     $(function() {
@@ -157,7 +156,7 @@
             </div>
         </div>
     </div>
-    <?php include("footer.php") ?>
+    <?php include("helper/footer.php") ?>
 </body>
 
 </html>
