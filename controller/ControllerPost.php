@@ -19,15 +19,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $data->setTimezone(new DateTimeZone('America/Sao_Paulo'));
         $dt = $data->format('Y-m-d H:i:s');
 
-        
+
         if ($post->insert($post->getTitle(), $post->getDescription(), $dt, 0, $post->getUserId(), $post->getCategoryId()) == true) {
             echo "<script type='text/javascript'>alert('Post saved successfully!');window.location.href = '../view/blog-home.php';</script>";
         } else echo "<script type='text/javascript'>alert('Something went wrong, try again');window.location.href = '../view/blog-new-post.php';</script>";
-    
     } else if (filter_input(INPUT_POST, "postOp") == 2) { //like
         $idPost = filter_input(INPUT_POST, "idPost");
         $post = new Post($idPost);
         echo $post->likePost();
-
-    } 
+    } else if (filter_input(INPUT_POST, "postOp") == 3) { //delete
+        $idPost = filter_input(INPUT_POST, "idPost");
+        echo $idPost;
+        //para excluir um post preciso excluir os comentarios antes
+        $post = new Post();
+        $comment = new Comment();
+        if ($comment->countComment($idPost) > 0) { //OCntando comentarios na publicação que desejo excluir
+            if ($comment->deleteComment($idPost) == true) {
+                if ($post->deletePost($idPost) == true) {
+                    echo "<script type='text/javascript'>alert('Post delete successfully!');window.location.href = '../view/blog-home.php';</script>";
+                } else echo "<script type='text/javascript'>alert('Something went wrong to delete post, try again');window.location.href = '../view/blog-admin.php';</script>";
+            } else echo "<script type='text/javascript'>alert('Something went wrong to delete comment and post, try again');window.location.href = '../view/blog-admin.php';</script>";
+        }else{ //post não tem comentarios 
+            if ($post->deletePost($idPost) == true) {
+                echo "<script type='text/javascript'>alert('Post delete successfully!');window.location.href = '../view/blog-home.php';</script>";
+            } else echo "<script type='text/javascript'>alert('Something went wrong to delete post, try again');window.location.href = '../view/blog-admin.php';</script>";
+        }
+    }
 }

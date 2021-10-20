@@ -119,7 +119,7 @@
 
             <div class="rightcolumn">
                 <div class="card text-center">
-                    <h3>Popular Post</h3>
+                    <h3>POPULAR POST'S</h3>
                     <?php
                     $all = $post->listPopular();
 
@@ -149,7 +149,18 @@
                     ?>
                 </div>
                 <div class="card text-center">
-                    <h2>About Us</h2>
+                    <h3>SUGGESTION</h3>
+                    <h5 class="text-justify"><p>Suggest new access points to the library and laboratories in your region, or suggestions for improvements to the site, praise and complaints</p></h5>
+                    <div class="panel panel-default">
+                        <div class=" panel-body">
+                            <a href="suggestion.php">
+                                <button class="btn btn-block btn-success btn-md" style="padding:0px">I want to suggest</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card text-center">
+                    <h2>ABOUT US</h2>
                     <div class="panel panel-default">
                         <p class="bg-success">We develop this page with great care for the best user experience! <b>Follow us</b></p>
                         <div class=" panel-body">

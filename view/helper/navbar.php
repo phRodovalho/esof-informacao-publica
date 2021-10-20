@@ -21,7 +21,7 @@
                          <?php
                             if (isset($_SESSION['userType']) && $_SESSION['userType'] != 'P') {
                                 echo '<hr style="height:1px;background-color:ligth-gray; padding:0px; margin:5px;">';
-                                echo '<li><a href="blog-new-post.php">Admin Blog</a></li>';
+                                echo '<li><a href="blog-admin.php">Admin Blog</a></li>';
                             }
                             ?>
                      </ul>

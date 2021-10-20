@@ -106,6 +106,8 @@ class User
         return $this->location_idlocation;
     }
 
+    //CRUD
+
     public function insert_user($name, $email, $password, $user_type, $birth_date, $last_acess, $location_idlocation)
     {
 

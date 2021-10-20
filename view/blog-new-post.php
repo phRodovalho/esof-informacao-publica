@@ -62,7 +62,6 @@
                         </div>
                     </div>
                     <input type="hidden" value="1" name="postOp">
-                    <?php echo $_SESSION['idUser'] ?>
                     <input type="hidden" value="<?php echo $_SESSION['idUser'] ?>" name="idUser">
                     <div class="form-group">
                         <div class="col">

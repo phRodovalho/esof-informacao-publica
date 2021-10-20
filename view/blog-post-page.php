@@ -94,7 +94,7 @@
 
                     <p><span class="badge">
                             <?php
-                            echo $count = $comment->countComment($id);
+                            echo $count = $comment->countComment($id); //mostrando quantidade de comentarios
                             ?>
                         </span> Comments:</p><br>
 

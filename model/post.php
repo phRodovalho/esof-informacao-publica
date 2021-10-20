@@ -143,6 +143,19 @@ class Post
         return $posts;
     }
 
+    public function listAllPost()
+    {
+        $sql = "SELECT p.idpost, p.title, p.description, p.date, p.likes, c.category, u.name FROM post p, category c, user u WHERE p.category_idcategory = c.idcategory and p.user_idUser = u.idUser";
+
+        $posts = [];
+
+        foreach ($this->conexao->query($sql) as $key => $value) {
+            array_push($posts, $value);
+        }
+
+        return $posts;
+    }
+
     public function listOnePost($idPost)
     {
         $sql = "select * from post where idpost = ? ";
@@ -180,14 +193,15 @@ class Post
         }
     }
 
-    public function delete(int $idPost): int
+    public function deletePost(int $idPost)
     {
+        //para excluir um post antes preciso excluir os comentarios
         $sql = 'delete from post where idpost = ?';
 
         $prepare = $this->conexao->prepare($sql);
 
         $prepare->bindParam(1, $idPost);
-
+        
         if ($prepare->execute() == TRUE) {
             return true;
         } else {
@@ -272,5 +286,21 @@ Class Comment{
 
         $prepare = $this->conexao->query($sql);
         return $prepare->fetchColumn();
+    }
+
+    public function deleteComment(int $idPost)
+    {
+        //para excluir um post antes preciso excluir os comentarios
+        $sql = "delete from comment Where post_idpost = ?"; 
+        
+        $prepare = $this->conexao->prepare($sql);
+
+        $prepare->bindParam(1, $idPost);
+        
+        if ($prepare->execute() == TRUE) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
