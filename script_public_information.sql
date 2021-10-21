@@ -114,6 +114,30 @@ ALTER TABLE `user`
 ADD CONSTRAINT FK_location_user
 FOREIGN KEY (`location_idlocation`) REFERENCES `location` (`idlocation`); 
 
+#--- iNSERT ---
+#---TYPES---
+insert into types (type) values ("PUBLIC LABORATORY");
+insert into types (type) values ("PRIVATE LABORATORY");
+insert into types (type) values ("PUBLIC LIBRARY");
+insert into types (type) values ("PRIVATE LIBRARY");
+
+#--CATEGORY--
+insert into category (category) values ("FREE COURSES");
+insert into category (category) values ("RIGHTS AND DUTIES");
+
+#--LOCATION--
+insert into location (state, country, city, adress, district) values ("MG", "BRASIL", "UBERLÂNDIA", "Praça Prof. Jacy de Assis", "CENTRO");
+insert into location (state, country, city, adress, district) values ("MG", "BRASIL", "UBERLÂNDIA", "R. Ernesto Vicentini, 231", "ROOSEVELT");
+
+
+
+
+
+
+
+
+
+
 
 
 

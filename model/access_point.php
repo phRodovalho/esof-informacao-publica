@@ -78,7 +78,8 @@ Class Access_Point
     }
     //list
     public function listPoint(){
-        $sql = 'select a.title, a.description, a.internet_access, t.type, l.adress, l.district, l.city, l.state, l.country from access_point a, types t, location l where a.types_idtypes = t.idtypes and a.location_idlocation = l.idlocation;'; 
+        $sql = 'select a.idaccess_point,
+         a.title, a.description, a.internet_access, t.type, l.adress, l.district, l.city, l.state, l.country from access_point a, types t, location l where a.types_idtypes = t.idtypes and a.location_idlocation = l.idlocation;'; 
         
         $point = [];
 
@@ -197,5 +198,34 @@ class Location
         } else {
             return false;
         }
+    }
+}
+
+Class Type{
+    private $conexao;
+    private $typeName;
+
+    public function __construct()
+    {
+        $banco = new Banco();
+        $this->conexao = $banco->getConnection();
+    }
+
+    public function setTypeName($name){
+        $this->typeName = $name;
+    }
+    public function getTypeName(){
+        return $this->typeName;
+    }
+
+    public function listType(){
+        $sql = 'select * from types;'; 
+            
+        $type = [];
+
+        foreach ($this->conexao->query($sql) as $value) {
+            array_push($type, $value);
+        }
+        return $type;
     }
 }
