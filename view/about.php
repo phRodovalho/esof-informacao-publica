@@ -8,13 +8,14 @@
 
 <body>
     <?php include("helper/navbar.php") ?>
-    <div class="container panel panel-default" style="padding: 20px;">
 
 
-        <div class="container">
+
+    <div class="container panel panel-default">
+        <div class="panel-body">
             <div class="jumbotron">
                 <h2 class="display-3 text-center">Quem Somos</h2>
-                <h6 class="text-monospace">
+                <h6 class="tagh6">
                     <br></br>
                     Este site foi desenvolvido entre os alunos da Universidade Federal de Uberlândia e a Middle Tennessee State University,
                     tem como objetivo ajudar a
@@ -32,17 +33,12 @@
                         <div class="row">
                             <!--  Coluna media mg, lg grande, sm smal-->
                             <div class="col-md-6">
-                                <img src="img/gess.jpg" width="80%" class="img-circle">
-                                <div class="btn-group but">
-                                    <br>
-                                    <p>Géssica Santos</p>
-                                    <button type="button" class="btn btn-primary">
-                                        <a href="https://github.com/GessicaS0" target="_blank">Github</a>
-                                    </button>
-
-                                    <button type="button" class="btn btn-primary">
-                                        <a href="https://www.linkedin.com/in/g%C3%A9ssica-santos-47b7911b3/" target="_blank">Linkedin</a>
-                                    </button>
+                                <img src="img/gess.jpg" width="50%" class="img-circle">
+                                <br>
+                                <p><b>Géssica Santos</b></p>
+                                <div class="btn-group">
+                                    <a class="btn btn-primary" href="https://github.com/GessicaS0" target="_blank">Github</a>
+                                    <a class="btn btn-primary" href="https://www.linkedin.com/in/g%C3%A9ssica-santos-47b7911b3/" target="_blank">Linkedin</a>
                                 </div>
                             </div>
 
@@ -66,9 +62,9 @@
                 </div>
             </section>
 
-
         </div>
     </div>
+
     <?php include("helper/footer.php") ?>
 
 

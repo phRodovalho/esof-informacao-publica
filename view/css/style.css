@@ -126,7 +126,7 @@ footer {
 
 /*Add style h6, h2, h3 about us*/
 
-h6 {
+.tagh6 {
     font-family: Andale Mono, monospace;
     font-size: medium;
 }
