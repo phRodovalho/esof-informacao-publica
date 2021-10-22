@@ -14,9 +14,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $email = filter_input(INPUT_POST, "emailC", FILTER_SANITIZE_EMAIL);
         $psw = filter_input(INPUT_POST, "passwordC");
 
+        // verifico se as variaveis estão vazias
         if (isset($name) && isset($date_birth) && isset($usr_type) && isset($email) && isset($psw)) {
 
-            //pt-br inserindo valores do formulário para o banco
+            //pt-br inserindo valores do formulário para o obj user
             $user = new User();
             $user->set_name($name);
             $user->set_email($email);
@@ -72,18 +73,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             echo "<script type='text/javascript'>alert('Error all information User has set');window.location.href = '../view/create-account.php';</script>";
         }
-    } else if (filter_input(INPUT_POST, "userOp") == 2) { //login
-        $email = filter_input(INPUT_POST, "email");
-        $psw = filter_input(INPUT_POST, "password");
+    } else if (filter_input(INPUT_POST, "userOp") == 2) { //l
+        $email = filter_input(INPUT_POST, "email");     // pegando email
+        $psw = filter_input(INPUT_POST, "password");    // pegando senha 
 
-        $user_login = new User();
-        $date = new DateTime();
-        $date->setTimezone(new DateTimeZone('America/Sao_Paulo'));
+        $user_login = new User();       //instanciando um obj do tipo user
+        $date = new DateTime();         // instanciando um obj do tipo data
+        $date->setTimezone(new DateTimeZone('America/Sao_Paulo'));      /// setando o horário da região sp
         $last_a = $date->format('Y-m-d H:i:s');
 
-        $value = $user_login->select_user($email, $psw); //retorna aray de usuarios cadastrados
+        $value = $user_login->select_user($email, $psw); // recebo de user um obj e salvo em value
         
+        //eu verifico se meu value é diferente de falso - se falso user não existe no banco
         if ($value != false) {
+            //pt-br pegando o as variavel do obj user e setando elas nas variaveis de sessão
             $_SESSION['idUser'] = $value['idUser'];
             $_SESSION['nameUser'] = $value['name'];
             $_SESSION['emailUser'] = $value['email'];
@@ -91,10 +94,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['userType'] = $value['user_type'];
             $_SESSION['birth_dateUser'] = $value['birth_date'];
             $_SESSION['lastAcessUser'] = $value['last_acess'];
-            // pt-br setando o ultimo acesso e relacionando com usuario da sessão
-            $user_login->set_lastacess($last_a, $value['idUser']);
-
             $_SESSION['idLocationUser'] = $value['location_idlocation'];
+
+            // pt-br setando o ultimo acesso e relacionando com usuario da sessão
+            $user_login->set_lastacess($last_a, $value['idUser']); //chamando a função de ultimo acesso que salva no banco a ultima vez que o user fez o login
 
             echo "<script type='text/javascript'>alert('Login sucess');window.location.href = '../view/home.php';</script>";
         } else echo "<script type='text/javascript'>alert('Access not allowed, try again or create account');window.location.href = '../view/login.php';</script>";
