@@ -20,7 +20,7 @@ class User
         $this->conexao = $banco->getConnection();
     }
 
-    // pt-br atribuindo os valores com set 
+    // pt-br atribuindo os valores com set
 
     public function set_name($name)
     {
@@ -132,6 +132,7 @@ class User
 
     public function select_user($email, $psw)
     {   
+        
         $stmt = $this->conexao->prepare("SELECT * from user where email = ? and password = ?");
         $stmt->execute([$email, $psw]); 
         $user = $stmt->fetch();

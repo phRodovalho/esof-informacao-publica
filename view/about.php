@@ -43,18 +43,14 @@
                             </div>
 
                             <div class="col-md-6">
-                                <img src="img/ph.jpg" width="80%" class="img-circle">
-                                <div class="btn-group but">
-                                    <br>
-                                    <p>Phelipe Rodovalho</p>
-                                    <button type="button" class="btn btn-primary">
-                                        <a href="https://github.com/phRodovalho" target="_blank">Github</a>
-                                    </button>
-
-                                    <button type="button" class="btn btn-primary">
-                                        <a href="https://www.linkedin.com/in/phelipe-rodovalho-ufu/" target="_blank">Linkedin</a>
-                                    </button>
+                                <img src="img/ph.jpg" width="50%" class="img-circle">
+                                <br>
+                                <p><b>Phelipe Rodovalho</b></p>
+                                <div class="btn-group">
+                                    <a class="btn btn-primary" href="https://github.com/phRodovalho" target="_blank">Github</a>
+                                    <a class="btn btn-primary" href="https://www.linkedin.com/in/phelipe-rodovalho-ufu/" target="_blank">Linkedin</a>
                                 </div>
+
                             </div>
 
                         </div>
