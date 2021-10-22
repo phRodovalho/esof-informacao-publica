@@ -46,7 +46,7 @@ class Post
 
 
             if ($prepare->execute() == true) {
-                return $this->likes;
+                return $this->likes; //se der certo então retorno a quantidade de likes
             } else {
                 return false;
             }

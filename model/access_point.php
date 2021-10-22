@@ -194,6 +194,7 @@ class Location
 
         if ($prepare->execute() == TRUE) {
             $last_id = $this->conex->lastInsertId();
+            echo $last_id;
             return $last_id;
         } else {
             return false;
