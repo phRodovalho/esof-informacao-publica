@@ -9,15 +9,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (filter_input(INPUT_POST, "pointOp") == 1) { // pt-br se pontop for igual a 2 então é delete e 1 é insert
 
         //pt-br relacionando as váriaveis input do formulário com as váriaveis do php - AcessPoint
-        echo $title = filter_input(INPUT_POST, "txttitle");
-        echo $internetA = filter_input(INPUT_POST, "internetA");
-        echo $type = filter_input(INPUT_POST, "type");
-        echo $descrip = filter_input(INPUT_POST, "descrip");
-        echo $country = filter_input(INPUT_POST, "txtCountry");
-        echo $state = filter_input(INPUT_POST, "txtState");
-        echo $city = filter_input(INPUT_POST, "txtCity");
-        echo $adress = filter_input(INPUT_POST, "txtAdress");
-        echo $district = filter_input(INPUT_POST, "txtDistrict");
+        $title = filter_input(INPUT_POST, "txttitle");
+         $internetA = filter_input(INPUT_POST, "internetA");
+         $type = filter_input(INPUT_POST, "type");
+         $descrip = filter_input(INPUT_POST, "descrip");
+         $country = filter_input(INPUT_POST, "txtCountry");
+         $state = filter_input(INPUT_POST, "txtState");
+         $city = filter_input(INPUT_POST, "txtCity");
+         $adress = filter_input(INPUT_POST, "txtAdress");
+         $district = filter_input(INPUT_POST, "txtDistrict");
 
         //primeiro passo é inserir a localização pois para inserir o accessPoint é necessario o id da localização
         $location = new Location();
@@ -33,7 +33,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }echo "<script type='text/javascript'>alert('AccessPoint error, try again!');window.location.href = '../view/home.php';</script>";
 
     }else if (filter_input(INPUT_POST, "pointOp") == 2) { //falta implementar o delete
+        echo $idPoint = filter_input(INPUT_POST, "idPoint");       // pegando o id do access-point
+        echo $idlocation = filter_input(INPUT_POST, "idLoc");   
         
+        //para excluir um accesspoint preciso excluir a localização antes
+        $location = new Location();             //instanciando um obj do tipo location
+        $accessPoint = new Access_Point();       //instanciando um obj do accessPoint
+        
+        if($accessPoint->delete($idPoint) == true){
+            if($location->deleteLoc($idlocation) == true){
+                echo "<script type='text/javascript'>alert('Accesspoint delete successfully!');window.location.href = '../view/home.php';</script>";
+            }else echo "<script type='text/javascript'>alert('Atenccion! Delete AccessPoint but not delete Location, try again');window.location.href = '../view/home.php';</script>";
+        }else echo "<script type='text/javascript'>alert('Something wrong to delete AccessPoint error, try again');window.location.href = '../view/home.php';</script>";   
 
     }
 }

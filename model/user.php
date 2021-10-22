@@ -139,6 +139,37 @@ class User
 
         return $user;
     }
+
+    public function listUsers()
+    {
+        //pt-br comando select do banco de dados buscando os atributos no banco
+        //en-us database select command fetching the attributes in the database
+        $sql = 'select * from user;';
+
+        //pt-br declarando um array que vai ser preenchido e retornado
+        //en-us declaring an array that will be filled and returned
+        $user = [];
+
+        foreach ($this->conexao->query($sql) as $value) {  //pt-br pegando a lista de obj do user e inserindo no user | en-us taking the user obj list and inserting it into the user array
+            array_push($user, $value);
+        }
+        return $user;
+    }
+
+    public function delete($idUser){
+         //para excluir um user antes preciso excluir os comentarios
+         $sql = 'delete from user where idUser = ?';
+
+         $prepare = $this->conexao->prepare($sql);
+ 
+         $prepare->bindParam(1, $idUser);
+ 
+         if ($prepare->execute() == TRUE) {
+             return true;
+         } else {
+             return false;
+         }
+    }
 }
 
 class Location
@@ -247,6 +278,21 @@ class Location
             return $last_id;
         } else {
             return false;
+        }
+    }
+    public function deleteLoc($idLocation){
+        {
+            $sql = 'delete from location where idlocation = ?';
+    
+            $prepare = $this->conex->prepare($sql);
+    
+            $prepare->bindParam(1, $idLocation);
+            
+            if ($prepare->execute() == TRUE) {
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 }
