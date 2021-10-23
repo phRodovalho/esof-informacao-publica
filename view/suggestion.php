@@ -8,7 +8,20 @@
 
 
 <body>
-    <?php include("helper/navbar.php"); ?>
+    <?php include("helper/navbar.php");
+    
+    if(!isset($_SESSION['idUser'])){
+        echo '  <div class="container">
+          <div class="panel panel-default text center">
+              <div class="panel-body">
+              <h3>To send Suggestions you need to login or create an account</h3>
+              <a href="login.php" class="text-center btn btn-md btn-primary">Sign in or Create an account </a>
+              </div>
+              </div>
+          </div>';
+          exit();
+      }
+      ?>
 
     <div class="container panel panel-default" style="color: black;">
         <div class=" title well text-center">

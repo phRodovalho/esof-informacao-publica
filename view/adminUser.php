@@ -10,7 +10,8 @@
 
 <body>
     <?php include("helper/navbar.php");
-    require_once("../model/user.php");  ?>
+    require_once("../model/user.php");
+    require_once("../model/suggestion.php"); ?>
     <div class="container card ">
         <div class="panel-group" id="accordionmaster">
             <div class=" title well text-center">
@@ -111,11 +112,70 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">List Suggestions</a>
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">List Suggestions</a>
                     </h4>
                 </div>
-                <div id="collapse1" class="panel-collapse collapse">
+                <div id="collapse3" class="panel-collapse collapse">
                     <div class="panel-body">
+                        <table id="suggestionList" class="display" style="width:98%">
+                            <thead>
+                                <tr>
+                                    <th>Description</th>
+                                    <th>Date</th>
+                                    <th>User name</th>
+                                    <th>IdLocation</th>
+                                    <th>Adress</th>
+                                    <th>District</th>
+                                    <th>City</th>
+                                    <th>State</th>
+                                    <th>Country</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <?php
+                                $sug = new Suggestion();
+
+                                $arrayU = $sug->list();
+                                foreach ($arrayU as $key => $value) {
+                                    $desc = $value['description'];
+                                    $date = $value['date'];
+                                    $name = $value['name'];
+                                    $loc = $value['location_idlocation'];
+                                    $adress = $value['adress'];
+                                    $district = $value['district'];
+                                    $city = $value['city'];
+                                    $state = $value['state'];
+                                    $country = $value['country'];
+                                    echo "
+                                        <tr>
+                                            <td>$desc</td>
+                                            <td>$date</td>
+                                            <td>$name</td>
+                                            <td>$loc</td>
+                                            <td>$adress</td>
+                                            <td>$district</td>
+                                            <td>$city</td>
+                                            <td>$state</td>
+                                            <td>$country</td>
+                                        </tr>";
+                                }
+                                ?>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Description</th>
+                                    <th>Date</th>
+                                    <th>User name</th>
+                                    <th>IdLocation</th>
+                                    <th>Adress</th>
+                                    <th>District</th>
+                                    <th>City</th>
+                                    <th>State</th>
+                                    <th>Country</th>
+                                </tr>
+                            </tfoot>
+                        </table>
 
                     </div>
                 </div>
@@ -126,6 +186,10 @@
     <script>
         $(document).ready(function() {
             $('#userList').DataTable();
+        });
+
+        $(document).ready(function() {
+            $('#suggestionList').DataTable();
         });
     </script>
 </body>

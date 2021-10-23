@@ -26,13 +26,13 @@
                             ?>
                      </ul>
                  </li>
+                 <li><a href="suggestion.php">Suggestions</a></li>
                  <li><a href="about.php">About us</a></li>
              </ul>
              <ul class="nav navbar-nav navbar-right">
                  <?php
-                    //$_SESSION['name'] = ' Phelipe';
                     if (isset($_SESSION['nameUser']) == true) { //se tem usuário setado
-                        if ($_SESSION['userType'] == 'P') { //se usuario é padrão não habilita crud de admin
+                        if ($_SESSION['userType'] == 'P' || $_SESSION['userType'] == 'W') { //se usuario é padrão não habilita crud de admin
                             echo '<li><a><span class="glyphicon glyphicon-user"></span> ' . $_SESSION['nameUser'] . '</b></a></li>';
                             echo '<li><a href="logout.php"><span class="glyphicon glyphicon-log-out"></span> <b>Logout</b></a></li>';
                         } else { //usuário admin

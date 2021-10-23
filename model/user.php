@@ -172,7 +172,7 @@ class User
     }
 }
 
-class Location
+Class Location
 {
     private $state;
     private $country;
