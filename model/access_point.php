@@ -283,14 +283,18 @@ class Type
 
     // pt-br atribuindo os valores com set
     // en-us assigning values ​​with set
+
     public function setTypeName($name)
     {
+
         $this->typeName = $name;
     }
     //pt-br pegando os dados com get
     //en-us getting the data with get
+
     public function getTypeName()
     {
+
         return $this->typeName;
     }
 

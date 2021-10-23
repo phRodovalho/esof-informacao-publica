@@ -47,8 +47,11 @@ class User
         $this->birth_date = $birth_date;
     }
 
+    //Função que atualiza o ultimo acesso do usuário
     public function set_lastacess($last_acess, $idUser)
     {
+        //pt-br recebendo o ultimo acesso setando ele no obj usuário e atualizando com o update
+        //en-us
         $this->last_acess = $last_acess;
 
         $sql = 'UPDATE user SET last_acess = ? WHERE idUser = ?';
@@ -70,7 +73,6 @@ class User
     }
 
     //pt-br pegando os dados com get
-
     public function getname()
     {
         return $this->name;
@@ -107,13 +109,15 @@ class User
     }
 
     //CRUD
-
+    //Função de inserir usuário
     public function insert_user($name, $email, $password, $user_type, $birth_date, $last_acess, $location_idlocation)
     {
 
         $sql = 'INSERT INTO user (name , email , password , user_type , birth_date , last_acess , location_idlocation) VALUES (?,?,?,?,?,?,?)';
         $prepare = $this->conexao->prepare($sql);
 
+        //pt-br vincula um parametro ao nome da variavel especificada
+        //en-us binds a parameter to the specified variable name
         $prepare->bindParam(1, $name);
         $prepare->bindParam(2, $email);
         $prepare->bindParam(3, $password);
@@ -129,10 +133,10 @@ class User
         }
     }
 
-
+    //Função usava para fazer o login
     public function select_user($email, $psw)
     {   
-        
+        //pt-br Ela verifica se o usuário e senha existem no bd
         $stmt = $this->conexao->prepare("SELECT * from user where email = ? and password = ?");
         $stmt->execute([$email, $psw]); 
         $user = $stmt->fetch();
@@ -174,6 +178,8 @@ class User
 
 Class Location
 {
+    ///pt-br criando os atributos privados
+    /// en-us creating the private atributes
     private $state;
     private $country;
     private $city;
@@ -188,6 +194,7 @@ Class Location
         $this->conex = $banco->getConnection();
     }
 
+    // pt-br atribuindo os valores com set
     public function set_state($state)
     {
         $this->state = $state;
@@ -260,6 +267,7 @@ Class Location
         return $this->longitude;
     }
 
+    //função que insere localização no banco
     public function insert_location($state, $country, $city, $adress, $district)
     {
 
@@ -267,6 +275,8 @@ Class Location
         
         $prepare = $this->conex->prepare($sql);
 
+        //pt-br vincula um parametro ao nome da variavel especificada
+        //en-us binds a parameter to the specified variable name
         $prepare->bindParam(1, $state);
         $prepare->bindParam(2, $country);
         $prepare->bindParam(3, $city);
@@ -274,6 +284,8 @@ Class Location
         $prepare->bindParam(5, $district);
 
         if ($prepare->execute() == TRUE) {
+
+            //pt-br pega o id da linha que acabou de ser inserida e retorna
             $last_id = $this->conex->lastInsertId();
             return $last_id;
         } else {
