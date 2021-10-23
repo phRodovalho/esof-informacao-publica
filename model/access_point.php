@@ -2,7 +2,7 @@
 require_once("banco.php");
 
 //criando classe pontos de acesso
-Class Access_Point
+class Access_Point
 {
     //pt-br criando os atributos privados
     //en-us creating the private atributes
@@ -11,6 +11,7 @@ Class Access_Point
     private $interAcces;
     private $idTypes;
     private $idLocation;
+    private $conexao;
 
     public function __construct()
     {
@@ -22,50 +23,61 @@ Class Access_Point
 
     // pt-br atribuindo os valores com set
     // en-us assigning values ​​with set
-    public function setTitle($title){
+    public function setTitle($title)
+    {
         $this->title = $title;
     }
-    
-    public function setDescription($description){
+
+    public function setDescription($description)
+    {
         $this->description = $description;
     }
-    
-    public function setInternetAcess($internA){
+
+    public function setInternetAcess($internA)
+    {
         $this->interAcces = $internA;
     }
 
-    public function setIdTypes($idTypes){
+    public function setIdTypes($idTypes)
+    {
         $this->idTypes = $idTypes;
     }
 
-    public function setIdLocation($idLocation){
+    public function setIdLocation($idLocation)
+    {
         $this->idLocation = $idLocation;
     }
 
     //pt-br pegando os dados com get
     //en-us getting the data with get
-    public function getTitle(){
+    public function getTitle()
+    {
         return  $this->title;
     }
-    public function getDescription(){
+    public function getDescription()
+    {
         return  $this->description;
     }
-    public function getInternetAccess(){
+    public function getInternetAccess()
+    {
         return  $this->interAcces;
     }
-    public function getIdTypes(){
+    public function getIdTypes()
+    {
         return  $this->idTypes;
     }
-    public function getLocation(){
+    public function getLocation()
+    {
         return  $this->idLocation;
     }
 
     //CRUD
     //pt-br criando a função de inserir um novo ponto de acesso
     //en-us creating the function to insert a new access point
-    public function insertPoint($title, $description, $interAcces, $idTypes, $idLocation){
+    public function insertPoint($title, $description, $interAcces, $idTypes, $idLocation)
+    {
         $sql = 'INSERT INTO access_point (title, description, internet_access, types_idtypes, location_idlocation) VALUES (?, ?, ?, ?, ?)';
-        
+
         $prepare = $this->conexao->prepare($sql);   //pt-br prepara uma instrução para execução e retorna um obj de instrução | en-us prepares an instruction for execution and returns an instruction obj
 
         //pt-br vincula um parametro ao nome da variavel especificada
@@ -81,16 +93,16 @@ Class Access_Point
         } else {
             return false;
         }
-
     }
     //pt-br criando a função de listar os pontos de acesso 
     //en-us creating the function to list the hotspots
-    public function listPoint(){
+    public function listPoint()
+    {
         //pt-br comando select do banco de dados buscando os atributos no banco
         //en-us database select command fetching the attributes in the database
         $sql = 'select a.idaccess_point,
-         a.title, a.description, a.internet_access, t.type, l.adress, l.district, l.city, l.state, l.country from access_point a, types t, location l where a.types_idtypes = t.idtypes and a.location_idlocation = l.idlocation;'; 
-        
+         a.title, a.description, a.internet_access, t.type, l.idlocation, l.adress, l.district, l.city, l.state, l.country from access_point a, types t, location l where a.types_idtypes = t.idtypes and a.location_idlocation = l.idlocation;';
+
         //pt-br declarando um array que vai ser preenchido e retornado
         //en-us declaring an array that will be filled and returned
         $point = [];
@@ -101,6 +113,22 @@ Class Access_Point
         return $point;
     }
 
+    public function delete($idPoint)
+    {
+
+        //para excluir um accessPoint antes preciso excluir os comentarios
+        $sql = 'delete from access_point where idaccess_point = ?';
+
+        $prepare = $this->conexao->prepare($sql);
+
+        $prepare->bindParam(1, $idPoint);
+
+        if ($prepare->execute() == TRUE) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
 //pt-br criando classe localização
 //en-us creating location class
@@ -200,7 +228,7 @@ class Location
     {
 
         $sql = 'INSERT INTO location (state , country , city , adress , district) VALUES (?,?,?,?,?)';
-        
+
         $prepare = $this->conex->prepare($sql);     //prepara uma instrução para execução e retorna um obj de instrução
 
         //vincula um parametro ao nome da variavel especificada
@@ -210,18 +238,35 @@ class Location
         $prepare->bindParam(4, $adress);
         $prepare->bindParam(5, $district);
 
-        if ($prepare->execute() == TRUE) {    
+        if ($prepare->execute() == TRUE) {
             $last_id = $this->conex->lastInsertId();    //usando a função nativa do PDO lastinsertId que retorna o id da ultima linha inserida
             return $last_id;                           // retornando ess ultimo id
         } else {
             return false;
         }
     }
+
+    public function deleteLoc($idLocation){
+        {
+            $sql = 'delete from location where idlocation = ?';
+    
+            $prepare = $this->conex->prepare($sql);
+    
+            $prepare->bindParam(1, $idLocation);
+            
+            if ($prepare->execute() == TRUE) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
 }
 
 //pt-br criando a classe tipo 
 //en-us creating the type class
-Class Type{
+class Type
+{
 
     //pt-br criando os atributos privados
     // en-us creating the private atributes
@@ -231,27 +276,34 @@ Class Type{
     public function __construct()
     {
         //pt-br criando o objeto para conexão com o banco
-         //en-us creating the object to connect to the bank
+        //en-us creating the object to connect to the bank
         $banco = new Banco();
         $this->conexao = $banco->getConnection();
     }
 
     // pt-br atribuindo os valores com set
     // en-us assigning values ​​with set
-    public function setTypeName($name){
+
+    public function setTypeName($name)
+    {
+
         $this->typeName = $name;
     }
     //pt-br pegando os dados com get
     //en-us getting the data with get
-    public function getTypeName(){
+
+    public function getTypeName()
+    {
+
         return $this->typeName;
     }
 
     // pt-br criando a função de listar os tipos
     // en-us en-us getting the data with get 
-    public function listType(){
-        $sql = 'select * from types;'; 
-            
+    public function listType()
+    {
+        $sql = 'select * from types;';
+
         $type = [];
 
         foreach ($this->conexao->query($sql) as $value) { //pt-br pegando os obj do tipo e inserindo no array type, retorno o type | en-us taking the type's obj and inserting it into the type array, I return the type

@@ -63,7 +63,7 @@ class Post
             //pt-br executando o sql no banco e salvando
             //
             if ($prepare->execute() == true) {
-                return $this->likes;
+                return $this->likes; //se der certo então retorno a quantidade de likes
             } else {
                 return false;
             }

@@ -124,23 +124,8 @@ footer {
 }
 
 
-/*Add style h6, h2, h3 about us*/
 
 .tagh6 {
     font-family: Andale Mono, monospace;
     font-size: medium;
-}
-
-h2 {
-    font-family: Andale Mono, monospace;
-    font-size: 50px;
-}
-
-h3 {
-    font-family: Andale Mono, monospace;
-    font-size: 30px;
-}
-
-a {
-    color: black;
 }

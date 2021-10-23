@@ -88,26 +88,21 @@
             </table>
         </div>
 
-        <?php
-        if (isset($_SESSION['userType']) && $_SESSION['userType'] == 'A') {
-            echo '<div class="panel-body row">
-            <h3>Admin Space</h3>
-            <div class="btn-group btn-group-justified">
-                <a href="accessPoint-insert" class="btn btn-primary">Insert new Access Point</a>
-                <a href="accessPoint-delete" class="btn btn-primary">Delete Access Point</a>
-            </div>
-        </div>';
-        }
-        ?>
+        <!-- Daqui pra baixo só acessa se for ADM !-->
 
-        <div class="panel-group" id="accordion">
+        <div class="panel-group hide card" id="accordionmaster">
+            <div class=" title well text-center">
+                <h2>
+                    <span> Adm Space 
+                </h2>
+            </div>
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Insert New accessPoint</a>
                     </h4>
                 </div>
-                <div id="collapse1" class="panel-collapse collapse in">
+                <div id="collapse1" class="panel-collapse collapse">
                     <div class="panel-body">
                         <form action="../controller/ControllerAccessPoint.php" method="post" id="form">
                             <div class="form-row">
@@ -192,8 +187,9 @@
                     <div class="panel-body">
                         <div class="container">
                             <form class="form-inline" action="../controller/ControllerAccessPoint.php" method="post">
-                                <label>Inform <b>'IdAccessPoint'</b> to delete AccessPoint:</label>
-                                <input type="number" name="idPoint">
+                                <label>Inform <b>'IdAccessPoint and IdLocation'</b> to delete AccessPoint:</label>
+                                <input type="number" name="idPoint" placeholder="Num of Id AccessPoint    ">
+                                <input type="number" name="idLoc" placeholder="Num of Id Location">
                                 <input type="hidden" value="2" name="pointOp">
                                 <input class="btn btn-danger" type="submit" value="Delete Access Point">
                             </form>
@@ -207,6 +203,7 @@
                                     <th>Description</th>
                                     <th>Internet Acess</th>
                                     <th>Type</th>
+                                    <th>IdLocation</th>
                                     <th>Adress</th>
                                     <th>District</th>
                                     <th>City</th>
@@ -220,13 +217,14 @@
                                 $accessPoint = new Access_Point();
 
                                 $point = $accessPoint->listPoint();
-
                                 foreach ($point as $key => $value) {
                                     $idpoint = $value['idaccess_point'];
                                     $title = $value['title'];
                                     $description = $value['description'];
                                     $internetAcess = $value['internet_access'];
                                     $type = $value['type'];
+                                    $idLoc = $value['idlocation'];
+                                    
                                     $adress = $value['adress'];
                                     $district = $value['district'];
                                     $city = $value['city'];
@@ -240,6 +238,7 @@
                                             <td>$description</td>
                                             <td>$internetAcess</td>
                                             <td>$type</td>
+                                            <td>$idLoc</td>
                                             <td>$adress</td>
                                             <td>$district</td>
                                             <td>$city</td>
@@ -256,6 +255,7 @@
                                     <th>Description</th>
                                     <th>Internet Acess</th>
                                     <th>Type</th>
+                                    <th>IdLocation</th>
                                     <th>Adress</th>
                                     <th>District</th>
                                     <th>City</th>
@@ -263,7 +263,7 @@
                                     <th>Country</th>
                                 </tr>
                             </tfoot>
-                        </table>        
+                        </table>
 
                     </div>
                 </div>
@@ -278,6 +278,16 @@
         $(document).ready(function() {
             $('#accessPoint2').DataTable();
         });
+
+        //php retorna a variavel session se tiver algo dentro senao retorna null
+        let userType = "<?php if (isset($_SESSION['userType']) == true) {
+                            echo $_SESSION['userType'];
+                        } else echo null;
+                        ?>";
+
+        if (userType == 'A') { //se for adm mostro op adm
+            document.getElementById('accordionmaster').classList.remove('hide');
+        }
     </script>
 </body>
 

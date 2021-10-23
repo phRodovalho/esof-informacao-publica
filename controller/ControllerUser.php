@@ -73,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             echo "<script type='text/javascript'>alert('Error all information User has set');window.location.href = '../view/create-account.php';</script>";
         }
-    } else if (filter_input(INPUT_POST, "userOp") == 2) { //l
+    } else if (filter_input(INPUT_POST, "userOp") == 2) { //login
         $email = filter_input(INPUT_POST, "email");     // pegando email
         $psw = filter_input(INPUT_POST, "password");    // pegando senha 
 
@@ -101,5 +101,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             echo "<script type='text/javascript'>alert('Login sucess');window.location.href = '../view/home.php';</script>";
         } else echo "<script type='text/javascript'>alert('Access not allowed, try again or create account');window.location.href = '../view/login.php';</script>";
+    } else if (filter_input(INPUT_POST, "userOp") == 3) { //delete
+        $idUser = filter_input(INPUT_POST, "idUser");
+        $idlocation = filter_input(INPUT_POST, "idLoc")
+        ;
+        $user = new User();                         //instanciando um obj do tipo user
+        $location = new Location();             //instanciando um obj do tipo location
+
+        if($user->delete($idUser) == true){
+            if($location->deleteLoc($idlocation) == true){
+                echo "<script type='text/javascript'>alert('User delete successfully!');window.location.href = '../view/adminUser.php';</script>";
+            }else echo "<script type='text/javascript'>alert('Attencion! Delete User but not delete Location, try again');window.location.href = '../view/adminUser.php';</script>";
+        }else echo "<script type='text/javascript'>alert('Something wrong to delete User, try again');window.location.href = '../view/adminUser.php';</script>";
     }
 }
